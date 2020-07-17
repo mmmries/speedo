@@ -1,19 +1,13 @@
 defmodule Speedo.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
-  @moduledoc false
-
   use Application
 
   def start(_type, _args) do
+    opts = [strategy: :one_for_one, name: Speedo.Supervisor]
+
     children = [
-      # Starts a worker by calling: Speedo.Worker.start_link(arg)
-      # {Speedo.Worker, arg}
+      {Registry, name: Speedo.Registry, keys: :duplicate}
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: Speedo.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end
