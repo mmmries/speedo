@@ -7,7 +7,12 @@ defmodule Speedo.MixProject do
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      package: package(),
+      docs: [
+        main: "readme",
+        extras: ["README.md"]
+      ]
     ]
   end
 
@@ -22,7 +27,20 @@ defmodule Speedo.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:circuits_gpio, "~> 0.4"}
+      {:circuits_gpio, "~> 0.4"},
+
+      {:ex_doc, "~> 0.15", only: :dev}
     ]
+  end
+
+  defp package do
+    %{
+      description: "Measure revolutions per second via a GPIO pin",
+      licenses: ["MIT"],
+      links: %{
+        github: "http://github.com/mmmries/speedo"
+      },
+      maintainers: ["Michael Ries"]
+    }
   end
 end
